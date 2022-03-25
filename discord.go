@@ -10,7 +10,10 @@ func handleMessage(c *gateway.MessageCreateEvent) {
 	// see if the message matches the pattern
 	submatches := memePattern.FindStringSubmatch(c.Content)
 
-	if len(submatches) != 0 {
+	if len(submatches) != 0 && !isRateLimited(c.Author.ID) {
+		// update rate limit to ensure i don't get banned from imgflip
+		updateRateLimit(c.Author.ID)
+
 		// make the text memed
 		memeText := memeify(submatches[1])
 

@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/signal"
 	"regexp"
+	"strconv"
 	"strings"
 	"syscall"
 )
@@ -32,4 +33,12 @@ func mustEnv(key string) (value string) {
 		log.Fatalln("missing required environment variable:", key)
 	}
 	return
+}
+
+func mustInt(input string) int64 {
+	output, err := strconv.ParseInt(input, 10, 64)
+	if err != nil {
+		log.Fatalln("failed to parse int:", err)
+	}
+	return output
 }

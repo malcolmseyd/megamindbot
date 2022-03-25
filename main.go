@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"time"
 
 	"github.com/diamondburned/arikawa/v3/gateway"
 	"github.com/diamondburned/arikawa/v3/session"
@@ -12,6 +13,10 @@ import (
 var username = mustEnv("IMGFLIP_USERNAME")
 var password = mustEnv("IMGFLIP_PASSWORD")
 var token = mustEnv("BOT_TOKEN")
+
+// RATE_LIMIT is the duration in seconds that a user must wait before it may use the bot again
+// the duration may be a decimal number
+var rateLimitDuration = time.Second * time.Duration(mustInt(mustEnv("RATE_LIMIT")))
 
 // the bot should get Guild messages as well as DMs
 var botIntents = []gateway.Intents{gateway.IntentGuildMessages, gateway.IntentDirectMessages}
