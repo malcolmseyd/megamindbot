@@ -13,7 +13,7 @@ import (
 // the meme pattern should match on anything after "no" and before punctuation
 // trim any trailing whitespace, and don't let the body just be whitespace
 // "Regex is a write-only language" - Bill Bird
-var memePattern = regexp.MustCompile(`[nN][oO]\s+([^.,!?;:\s][^.,!?;:]*)\s*`)
+var memePattern = regexp.MustCompile(`\b[nN][oO]\s+([^.,!?;:\s][^.,!?;:]*)\s*`)
 
 // format text so it looks like the meme
 func memeify(text string) string {
